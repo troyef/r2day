@@ -1,0 +1,34 @@
+<!-- index.html -->
+<html>
+  <head>
+    <title>Run Today</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="dist/es6-shim.js"></script>
+    
+    <style>
+    .hidden{display:none;}
+    </style>
+    
+  </head>
+  <body>
+  
+    <!-- The app component created in app.es6 -->
+    <my-app></my-app>
+    
+    <script>
+      // Rewrite the paths to load the files
+      System.paths = {
+        'angular2/*':'angular2/*.js', // Angular
+        'rtts_assert/*': 'rtts_assert/*.js', // Runtime assertions
+        'services/*': 'services/*.js',
+        'app': 'app.js' // The my-app component
+      };
+  
+      // Kick off the application
+      System.import('app');//.then(function(module) {
+//      module.main();
+//    }, console.log.bind(console));
+    </script>
+    
+  </body>
+</html>

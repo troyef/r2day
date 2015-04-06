@@ -1,0 +1,15 @@
+<input type="text" #zip />
+
+<button (click)="getWeather(zip.value)">get the weather</button>
+
+<button (click)="refresh()">Refresh</button>
+
+<div [class.hidden]="myLoc == ''">You are at {{myLoc}}.</div>
+
+<div [class.hidden]="theWeather == ''">Weather: {{theWeather}}</div>
+
+<div [class.hidden]="theWeather == ''">Temp: {{temp}}</div>
+
+<div [class.hidden]="theWeather == ''">Wind: {{wind}}</div>
+
+<div [class.hidden]="theWeather == ''">So it feels like: {{realTemp}}</div>
