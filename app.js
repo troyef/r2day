@@ -77,7 +77,6 @@ class MyAppComponent {
   
   refresh(){
     this.myLoc = this.myLoc;
-    
   }
   
   displayClothingSuggestions(wObj){
