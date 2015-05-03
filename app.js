@@ -2,6 +2,7 @@ import {Component,ChangeDetector, Template, bootstrap} from 'angular2/angular2';
 import {bind} from 'angular2/di';
 import {WeatherService} from 'services/WeatherService';
 import {LocationService} from 'services/LocationService';
+import {WhatToWearService} from 'services/WhatToWearService';
 
 // Annotation section
 @Component({
@@ -18,21 +19,36 @@ import {LocationService} from 'services/LocationService';
 class MyAppComponent {
   weatherService: WeatherService;
   locationService: LocationService;
+  whatToWearService: WhatToWearService;
   theWeather : any;
   myLoc: any;
   temp: any;
   wind: any;
   realTemp: any;
   
+  hat: any;
+  glove: any;
+  pant: any;
+  shirt: any;
+  jacker: any;
+  
+  
   constructor() {
     this.weatherService = new WeatherService();
     this.locationService = new LocationService();
+    this.whatToWearService = new WhatToWearService();
 
     this.theWeather = '';
     this.myLoc = '';
     this.temp = 0;
     this.wind = 0;
     this.realTemp = 0;
+    
+    this.hat = '';
+    this.glove = '';
+    this.pant = '';
+    this.shirt = '';
+    this.jacket = '';
 
     this.getLocation();
     
@@ -51,11 +67,27 @@ class MyAppComponent {
   }
   
   getWeather(zip){
-    this.weatherService.getZipWeather(zip, this.displayWeatherInfo.bind(this));
+    this.weatherService.getZipWeather(zip, this.handleWeatherCallback.bind(this));
+  }
+  
+  handleWeatherCallback(wObj){
+    this.displayWeatherInfo(wObj);
+    this.displayClothingSuggestions(wObj);
   }
   
   refresh(){
     this.myLoc = this.myLoc;
+    
+  }
+  
+  displayClothingSuggestions(wObj){
+    var wtw = this.whatToWearService.getWhatToWear(this.realTemp, wObj.weather[0].id);
+    console.dir(wtw);
+    this.hat = wtw.hat;
+    this.glove = wtw.glove;
+    this.pant = wtw.pant;
+    this.shirt = wtw.shirt;
+    this.jacket = wtw.jacket;
   }
   
   displayWeatherInfo(wObj){
