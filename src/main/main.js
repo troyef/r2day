@@ -8,6 +8,7 @@ var template = fs.readFileSync(__dirname + '/main.html', 'utf8');
 var WeatherService = require('../services/WeatherService');
 var LocationService = require('../services/LocationService');
 var WhatToWearService = require('../services/WhatToWearService');
+var WeatherModel = require('../models/WeatherModel');
 
 var MainModel = Backbone.Model.extend({});
 
@@ -87,7 +88,7 @@ module.exports = Backbone.View.extend({
   },
   
   handleWeatherCallback: function handleWeatherCallback(wObj){
-    this.displayWeatherInfo(wObj);
+    this.model = new WeatherModel(wObj);
     this.displayClothingSuggestions(wObj);
     this._updateRactive();
   },
@@ -105,24 +106,7 @@ module.exports = Backbone.View.extend({
     this.model.set('pant', wtw.pant);
     this.model.set('shirt', wtw.shirt);
     this.model.set('jacket', wtw.jacket);
-  },
-
-  displayWeatherInfo: function displayWeatherInfo(wObj){
-    console.dir(wObj);
-    this.model.set('myLoc',wObj.name || '');
-    this.model.set('theWeather', wObj.weather[0].main);
-    this.model.set('temp', wObj.main.temp);
-    this.model.set('wind', wObj.wind.speed);
-  
-    this.model.set('realTemp', this.getRealTemp());
-  },
-  
-  getRealTemp: function getRealTemp (){
-    var isRaining = (this.model.get('theWeather').toLowerCase().indexOf('rain') !== -1);
-    //take into account cloudy versus clear, etc.
     
-    return Math.round(this.model.get('temp') - (this.model.get('wind') / 5) - (isRaining ? 10 : 0));
   }
-  
   
 });
