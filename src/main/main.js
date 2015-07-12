@@ -41,10 +41,6 @@ module.exports = Backbone.View.extend({
     this.render();
   },
   
-  events: {
-      'click button.refresh': '_refreshButtonClick'
-  },
-  
   render: function () {
     var me = this;
     if (this.ractive) {
@@ -59,7 +55,6 @@ module.exports = Backbone.View.extend({
       template: template,
       data: this.model.toJSON(),
       
-      refresh: this._updateRactive.bind(this),
       getWeather: this.getWeather.bind(this)
     });
     this.delegateEvents();
@@ -90,11 +85,6 @@ module.exports = Backbone.View.extend({
   handleWeatherCallback: function handleWeatherCallback(wObj){
     this.model = new WeatherModel(wObj);
     this.displayClothingSuggestions(wObj);
-    this._updateRactive();
-  },
-  
-  refresh: function refresh(){
-    debugger;
     this._updateRactive();
   },
   
