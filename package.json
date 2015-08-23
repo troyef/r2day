@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bundle": "browserify -t reactify src/index.js -o bundle.js",
-    "standalone": "browserify -t src/services/WeatherService.js --standalone WService > wService.js",
-    "watch": "watchify -t src/index.js -o bundle.js -dv"
+    "standalone": "browserify -t reactify src/services/WeatherService.js --standalone WService > wService.js",
+    "watch": "watchify -t reactify src/index.js -o bundle.js -dv"
   }
 }

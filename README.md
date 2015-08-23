@@ -1,4 +1,4 @@
-# r2day
+# r2day - using React (and browserify)
 
 Load dependencies:
 
