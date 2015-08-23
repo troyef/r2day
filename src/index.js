@@ -1,3 +1,7 @@
-var MainView = require('./main/main');
+var React = require('react');
+var main = require('./main/main');
 
-var mainView = new MainView();
+React.render(
+  React.createElement(main,null),
+  document.getElementById('content')
+);

@@ -8,17 +8,16 @@
   },
   "author": "troyef",
   "dependencies": {
-    "backbone": "^1.2.1",
-    "brfs": "^1.4.0",
+    "react": "*",
+    "reactify": "*",
     "browserify": "^10.2.4",
     "jquery": "^2.1.4",
-    "ractive": "^0.7.3",
     "watchify": "^3.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "browserify -t brfs src/index.js -o bundle.js",
-    "standalone": "browserify -t brfs src/services/WeatherService.js --standalone WService > wService.js",
-    "watch": "watchify -t brfs src/index.js -o bundle.js -dv"
+    "bundle": "browserify -t reactify src/index.js -o bundle.js",
+    "standalone": "browserify -t src/services/WeatherService.js --standalone WService > wService.js",
+    "watch": "watchify -t src/index.js -o bundle.js -dv"
   }
 }
